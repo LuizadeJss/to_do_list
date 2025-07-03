@@ -1,5 +1,3 @@
-// Lista de tarefas agrupadas
-
 import React from 'react';
 import { View, Text, FlatList, Image } from 'react-native';
 import { agruparTarefasPorData, tituloData } from '../../utils/dateUtils';
@@ -7,11 +5,12 @@ import { TaskItem } from './TaskItem';
 import { useAppTheme } from '../../context/ThemeContext';
 import { styles } from '../../theme/styles';
 
-// Importe a imagem do local correto
 import bgImage from '../../images/background.png';
 
 export function TaskGroupList({ tarefas, onToggleComplete, onRemove }) {
   const { theme } = useAppTheme();
+
+  // 🔄 Agrupar usando o campo dataTarefa vindo do backend
   const grupos = agruparTarefasPorData(tarefas);
 
   if (grupos.length === 0) {
@@ -34,9 +33,14 @@ export function TaskGroupList({ tarefas, onToggleComplete, onRemove }) {
           {item.tarefas.map((tarefa) => (
             <TaskItem 
               key={tarefa.id} 
-              item={tarefa} 
-              onToggleComplete={onToggleComplete} 
-              onRemove={onRemove} 
+              item={{
+                id: tarefa.id,
+                texto: tarefa.texto,  // mapeia novaTarefa → texto para o TaskItem
+                concluida: tarefa.concluida,
+                data: tarefa.data,
+              }}
+              onToggleComplete={onToggleComplete}
+              onRemove={onRemove}
             />
           ))}
         </View>

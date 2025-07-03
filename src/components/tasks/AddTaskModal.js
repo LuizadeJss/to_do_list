@@ -1,5 +1,3 @@
-// Modal para adicionar tarefas
-
 import React from 'react';
 import { View, TextInput, TouchableOpacity, Text, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -9,7 +7,7 @@ import { styles } from '../../theme/styles';
 
 export function AddTaskModal({ 
   visible,
-  novaTarefa,
+  nova_tarefa,
   setNovaTarefa,
   dataSelecionada,
   setDataSelecionada,
@@ -20,10 +18,10 @@ export function AddTaskModal({
 }) {
   const { theme } = useAppTheme();
   
-  // Handler para alteração do datepicker
+  // Handler de seleção de data
   const onChangeDate = (event, selectedDate) => {
     if (Platform.OS === 'android') {
-      setShowDatePicker(false); // fecha o picker no Android após seleção ou cancelamento
+      setShowDatePicker(false); // fecha automaticamente no Android
     }
     if (selectedDate) {
       setDataSelecionada(selectedDate);
@@ -35,6 +33,7 @@ export function AddTaskModal({
   return (
     <View style={styles.modalOverlay}>
       <View style={[styles.modalContainer, { backgroundColor: theme.background }]}>
+        {/* Campo para digitar a tarefa */}
         <TextInput
           style={[
             styles.input,
@@ -46,12 +45,12 @@ export function AddTaskModal({
           ]}
           placeholder="Nova tarefa"
           placeholderTextColor={theme.placeholder}
-          value={novaTarefa}
+          value={nova_tarefa}
           onChangeText={setNovaTarefa}
           autoFocus
         />
 
-        {/* Botão para abrir DatePicker */}
+        {/* Botão de seleção da data */}
         <TouchableOpacity
           style={[styles.botaoAdd, { marginBottom: 12, backgroundColor: theme.primary }]}
           onPress={() => setShowDatePicker(true)}
@@ -61,7 +60,7 @@ export function AddTaskModal({
           </Text>
         </TouchableOpacity>
 
-        {/* Mostrar DatePicker quando showDatePicker for true */}
+        {/* DatePicker nativo */}
         {showDatePicker && (
           <DateTimePicker
             value={dataSelecionada}
@@ -73,6 +72,7 @@ export function AddTaskModal({
           />
         )}
 
+        {/* Botões de ação */}
         <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
           <TouchableOpacity onPress={onCancel} style={{ marginRight: 12 }}>
             <Text style={{ color: theme.primary }}>Cancelar</Text>

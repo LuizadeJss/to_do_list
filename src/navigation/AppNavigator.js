@@ -9,14 +9,16 @@ import { TasksScreen } from '../screens/TasksScreen';
 import { ProfileScreen } from '../screens/ProfileScreen';
 import { ScreenWithHeader } from '../screens/ScreenWithHeader';
 import { SideSheet } from '../components/common/SideSheet';
-import { View } from 'react-native-web';
+import { Button, View } from 'react-native-web';
+import { useNavigation } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
-export function AppNavigator() {
+export function AppNavigator({navigation}) {
   const { theme } = useAppTheme();
   const [menuVisible, setMenuVisible] = useState(false);
 
+  
   const onOpenMenu = () => setMenuVisible(true);
   const onCloseMenu = () => setMenuVisible(false);
 
@@ -89,8 +91,8 @@ export function AppNavigator() {
 
           <TouchableOpacity
             style={{ paddingVertical: 10, flexDirection: 'row', alignItems: 'center' }}
-            onPress={() => {
-              alert('Opção 2 selecionada');
+             onPress={() => {
+              navigation.navigate('../Configuracao');
               onCloseMenu();
             }}
           >
