@@ -15,9 +15,37 @@ import jakarta.persistence.Table;
 public class Tarefa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
-    public String nova_tarefa;
-    public boolean concluido;
-    public LocalDate data_tarefa;
+    private Long id;
+    private String nova_tarefa;
+    private boolean concluido;
+    private LocalDate data_tarefa;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNovaTarefa() {
+        return nova_tarefa;
+    }
+
+    public void setNovaTarefa(String novaTarefa) {
+        this.nova_tarefa = novaTarefa;
+    }
+
+    public boolean isConcluida() {
+        return concluido;
+    }
+
+    public void setConcluida(boolean concluida) {
+        this.concluido = concluida;
+    }
+
+    public LocalDate getDataTarefa() {
+        return data_tarefa;
+    }
+
+    public void setDataTarefa(LocalDate dataTarefa) {
+        this.data_tarefa = dataTarefa;
+    }
 
 }

@@ -4,7 +4,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { useAppTheme } from '../../context/ThemeContext';
 import { styles } from '../../theme/styles';
 
-// Função simples para formatar data de yyyy-MM-dd para dd/MM/yyyy
 const formatarData = (isoString) => {
   if (!isoString) return '';
   const [ano, mes, dia] = isoString.split('-');
@@ -23,28 +22,15 @@ export function TaskItem({ item, onToggleComplete, onRemove }) {
           color={theme.primary}
         />
       </TouchableOpacity>
-
-      <View style={styles.itemTextoContainer}>
-        <Text
-          style={[
-            styles.itemTexto,
-            {
-              color: theme.text,
-              textDecorationLine: item.concluida ? 'line-through' : 'none',
-            },
-          ]}
-        >
-          {item.texto}
-        </Text>
-
-        {/* Mostrar a data formatada */}
-        {item.data && (
-          <Text style={[styles.itemData, { color: theme.textSecondary }]}>
-            {formatarData(item.data)}
-          </Text>
-        )}
-      </View>
-
+      <Text style={[
+        styles.itemTexto,
+        {
+          color: theme.text,
+          textDecorationLine: item.concluida ? 'line-through' : 'none',
+        }
+      ]}>
+        {item.novaTarefa}
+      </Text>
       <TouchableOpacity onPress={() => onRemove(item.id)}>
         <Ionicons name="trash-outline" size={24} color="red" />
       </TouchableOpacity>
