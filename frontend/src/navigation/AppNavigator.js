@@ -9,12 +9,10 @@ import { TasksScreen } from '../screens/TasksScreen';
 import { ProfileScreen } from '../screens/ProfileScreen';
 import { ScreenWithHeader } from '../screens/ScreenWithHeader';
 import { SideSheet } from '../components/common/SideSheet';
-import { Button, View } from 'react-native-web';
-import { useNavigation } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
-export function AppNavigator({navigation}) {
+export function AppNavigator() {
   const { theme } = useAppTheme();
   const [menuVisible, setMenuVisible] = useState(false);
 
@@ -65,8 +63,7 @@ export function AppNavigator({navigation}) {
       <SideSheet visible={menuVisible} onClose={onCloseMenu}>
         
         <Text style={{ fontSize: 18, fontWeight: 'bold',width: '100%', marginBottom: 10 }}>Menu</Text>
-        
-        <View style={{marginBottom: 10}}>
+      
           <TouchableOpacity
             style={{ paddingVertical: 10, flexDirection: 'row', alignItems: 'center', marginTop: 10 }}
             onPress={() => {
@@ -92,14 +89,12 @@ export function AppNavigator({navigation}) {
           <TouchableOpacity
             style={{ paddingVertical: 10, flexDirection: 'row', alignItems: 'center' }}
              onPress={() => {
-              navigation.navigate('../Configuracao');
               onCloseMenu();
             }}
           >
             <Ionicons name="settings-outline" style={{ marginRight: 5}}/>
             <Text style={{ fontSize: 16 }}>Configurações</Text>
           </TouchableOpacity>
-        </View>
       </SideSheet>
     </NavigationContainer>
   );

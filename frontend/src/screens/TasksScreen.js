@@ -83,7 +83,6 @@ export function TasksScreen() {
       const res = await fetch(`${URL}/${id}`, { method: 'DELETE' });
 
       if (res.ok) {
-        console.log(`Tarefa com ID ${id} removida com sucesso`);
         carregarTarefas(); // Atualiza a lista
       } else {
         console.log(`Falha ao remover tarefa. Status: ${res.status}`);
