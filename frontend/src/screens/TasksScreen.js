@@ -8,7 +8,7 @@ import { styles } from '../theme/styles';
 import { TaskGroupList } from '../components/tasks/TaskGroupList';
 import { AddTaskModal } from '../components/tasks/AddTaskModal';
 
-const URL = 'https://servidorrest-j8ec.onrender.com/tarefas';
+const URL = 'http://localhost:8080/tarefas';
 
 export function TasksScreen() {
   const { theme } = useAppTheme();
@@ -56,8 +56,9 @@ export function TasksScreen() {
 
       if (res.ok) {
         setNovaTarefa('');
-        setDataSelecionada(new Date());
+        setDataSelecionada(dataSelecionada);
         setModalVisivel(false);
+        
         carregarTarefas(); 
       } else {
         Alert.alert('Erro', 'Falha ao adicionar tarefa');

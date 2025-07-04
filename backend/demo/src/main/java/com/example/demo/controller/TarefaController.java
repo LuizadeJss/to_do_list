@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,19 @@ public class TarefaController {
     @GetMapping
     public List<Tarefa> obterTodos(){
         return dao.findAll();
+    }
+
+    @GetMapping("/resumo")
+    public Map<String, Long> obterResumoTarefas() {
+        List<Tarefa> todas = dao.findAll();
+        long concluidas = todas.stream().filter(Tarefa::isConcluida).count();
+        long pendentes = todas.size() - concluidas;
+
+        Map<String, Long> resumo = new HashMap<>();
+        resumo.put("concluidas", concluidas);
+        resumo.put("pendentes", pendentes);
+
+        return resumo;
     }
 
     @PutMapping("/{id}/concluir")
