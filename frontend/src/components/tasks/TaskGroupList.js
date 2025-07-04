@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, FlatList, Image } from 'react-native';
-import { agruparTarefasPorData, formatDate } from '../../utils/dateUtils';
+import { agruparTarefasPorData, formatDate, tituloData } from '../../utils/dateUtils';
 import { TaskItem } from './TaskItem';
 import { useAppTheme } from '../../context/ThemeContext';
 import { styles } from '../../theme/styles';
@@ -27,7 +27,7 @@ export function TaskGroupList({ tarefas, onToggleComplete, onRemove }) {
       renderItem={({ item }) => (
         <View>
           <Text style={[styles.tituloGrupo, { color: theme.primary }]}>
-            {formatDate(item.dataKey)}
+            {tituloData(item.dataKey)}
           </Text>
           {item.tarefas.map((tarefa) => (
             <TaskItem 

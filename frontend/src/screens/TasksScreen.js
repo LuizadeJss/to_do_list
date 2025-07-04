@@ -8,7 +8,7 @@ import { styles } from '../theme/styles';
 import { TaskGroupList } from '../components/tasks/TaskGroupList';
 import { AddTaskModal } from '../components/tasks/AddTaskModal';
 
-const URL = 'http://localhost:8080/tarefas';
+const URL = 'https://servidorrest-j8ec.onrender.com/tarefas';
 
 export function TasksScreen() {
   const { theme } = useAppTheme();
@@ -24,7 +24,6 @@ export function TasksScreen() {
   try {
     const res = await fetch(URL);
     const json = await res.json();
-    console.log("Tarefas carregadas", json);
     
     setTarefas(json);
           

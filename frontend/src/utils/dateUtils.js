@@ -1,3 +1,4 @@
+//Formata uma data no formato dd/MM/yyyy
 export function formatDate(date) {
   const d = new Date(date);
   if (isNaN(d)) return "Data inválida";
@@ -9,17 +10,16 @@ export function formatDate(date) {
   return `${day}/${month}/${year}`;
 }
 
+//Agrupa tarefas por data da tarefa
 export function agruparTarefasPorData(tarefas) {
   const grupos = {};
 
   tarefas.forEach((tarefa) => {
-    const raw = tarefa.dataTarefa;
+    const rawData = tarefa.dataTarefa;
+    const data = new Date(rawData);
 
-    // Ignora tarefas sem data
-    if (!raw) return;
-
-    const data = new Date(raw);
-    if (isNaN(data)) return;
+    // ignora tarefas com data inválida
+    if (isNaN(data)) return; 
 
     const key = data.toISOString().split('T')[0];
 
@@ -33,4 +33,21 @@ export function agruparTarefasPorData(tarefas) {
     dataKey,
     tarefas: grupos[dataKey],
   }));
+}
+
+//título do grupo de tarefas conforme a data
+export function tituloData(dataISO) {
+  const hoje = new Date();
+  hoje.setHours(0, 0, 0, 0);
+
+  const amanha = new Date(hoje);
+  amanha.setDate(hoje.getDate() + 1);
+
+  const data = new Date(dataISO);
+  data.setHours(0, 0, 0, 0);
+
+  if (data.getTime() === hoje.getTime()) return 'Hoje';
+  if (data.getTime() === amanha.getTime()) return 'Amanhã';
+
+  return formatDate(data);
 }
